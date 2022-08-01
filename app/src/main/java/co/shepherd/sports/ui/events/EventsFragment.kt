@@ -1,7 +1,6 @@
 package co.shepherd.sports.ui.events
 
 import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.shepherd.sports.R
 import co.shepherd.sports.core.BaseFragment
@@ -57,25 +56,6 @@ class EventsFragment : BaseFragment<EventsViewModel, FragmentEventsBinding>(
     private fun initEventsAdapter() {
         val adapter =
             EventsAdapter { item, cardView ->
-//                val action =
-//                    DashboardFragmentDirections.actionDashboardFragmentToWeatherDetailFragment(
-//                        item
-//                    )
-//                findNavController()
-//                    .navigate(
-//                        action,
-//                        FragmentNavigator.Extras.Builder()
-//                            .addSharedElements(
-//                                mapOf(
-//                                    cardView to cardView.transitionName,
-//                                    forecastIcon to forecastIcon.transitionName,
-//                                    dayOfWeek to dayOfWeek.transitionName,
-//                                    temp to temp.transitionName,
-//                                    tempMaxMin to tempMaxMin.transitionName
-//                                )
-//                            )
-//                            .build()
-//                    )
             }
 
         binding.recyclerViewEvents.adapter = adapter
@@ -95,36 +75,4 @@ class EventsFragment : BaseFragment<EventsViewModel, FragmentEventsBinding>(
     private fun initEvents(list: List<Event>) {
         (binding.recyclerViewEvents.adapter as EventsAdapter).submitList(list)
     }
-
-//    private lateinit var eventsViewModel: EventsViewModel
-//
-//    private var _binding: FragmentEventsBinding? = null
-//
-//    // This property is only valid between onCreateView and
-//    // onDestroyView.
-//    private val binding get() = _binding!!
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//
-//        _binding = FragmentEventsBinding.inflate(inflater, container, false)
-//        eventsViewModel = ViewModelProvider(this).get(EventsViewModel::class.java)
-//        return binding.root
-//
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_EventsFragment_to_ScheduleFragment)
-//        }
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
 }
