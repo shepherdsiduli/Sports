@@ -9,8 +9,9 @@ import co.shepherd.sports.core.BaseAdapter
 import co.shepherd.sports.databinding.EventItemViewBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.ui.MediaPlayerActivity
+import co.shepherd.sports.utils.extensions.isNetworkAvailable
 
-class EventsAdapter (
+class EventsAdapter(
     private val callBack: (Event, View) -> Unit
 ) : BaseAdapter<Event>(diffCallback) {
 
@@ -25,7 +26,15 @@ class EventsAdapter (
 
         mBinding.cardView.setOnClickListener {
             mBinding.viewModel?.item?.get()?.let {
-                it.videoUrl?.let { url -> mBinding.cardView.context.startActivity(MediaPlayerActivity.getStartIntent(mBinding.cardView.context, url, it.title)) }
+                if (it.videoUrl != null && isNetworkAvailable(mBinding.cardView.context)) {
+                    mBinding.cardView.context.startActivity(
+                        MediaPlayerActivity.getStartIntent(
+                            mBinding.cardView.context,
+                            it.videoUrl,
+                            it.title
+                        )
+                    )
+                }
             }
         }
         return mBinding

@@ -58,5 +58,7 @@ class MediaPlayerActivity : AppCompatActivity() {
             exoPlayer.stop()
             exoPlayer.release()
         }
+        finish()
     }
+
 }
