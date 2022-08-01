@@ -5,6 +5,7 @@ import co.shepherd.sports.core.Constants
 import co.shepherd.sports.db.entities.ScheduleEntity
 import co.shepherd.sports.domain.datasources.schedule.ScheduleLocalDataSource
 import co.shepherd.sports.domain.datasources.schedule.ScheduleRemoteDataSource
+import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.model.ScheduleResponse
 import co.shepherd.sports.utils.domain.FrequencyLimiter
 import co.shepherd.sports.utils.domain.Resource
@@ -21,10 +22,10 @@ class ScheduleRepository @Inject constructor(
     fun loadSchedule(
         fetchRequired: Boolean
     ): LiveData<Resource<ScheduleEntity>> {
-        return object : NetworkBoundResource<ScheduleEntity, ScheduleResponse>() {
-            override fun saveCallResponse(item: ScheduleResponse) =
+        return object : NetworkBoundResource<ScheduleEntity, List<Event>>() {
+            override fun saveCallResponse(item: List<Event>) =
                 scheduleLocalDataSource.insertSchedule(
-                    item
+                    ScheduleResponse(item)
                 )
 
             override fun shouldFetch(data: ScheduleEntity?): Boolean = fetchRequired
@@ -32,7 +33,7 @@ class ScheduleRepository @Inject constructor(
             override fun loadFromDatabase(): LiveData<ScheduleEntity> =
                 scheduleLocalDataSource.getSchedule()
 
-            override fun createCall(): Single<ScheduleResponse> =
+            override fun createCall(): Single<List<Event>> =
                 scheduleRemoteDataSource.getSchedule()
 
             override fun onFetchFailed() = scheduleRateLimit.reset(Constants.SportsNetworkService.RATE_LIMITER_TYPE)

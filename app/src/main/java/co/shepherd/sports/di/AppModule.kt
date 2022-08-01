@@ -14,14 +14,4 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
-//
-//    @Provides
-//    fun provideGson(): Gson {
-//        return GsonBuilder()
-//            .registerTypeAdapter(
-//                OffsetDateTime::class.java, OffsetDateTimeTypeAdapter()
-//            ).registerTypeAdapter(
-//                LocalTime::class.java, LocalTimeTypeAdapter()
-//            ).create()
-//    }
 }

@@ -25,8 +25,7 @@ class EventsRepository @Inject constructor(
         return object : NetworkBoundResource<EventsEntity, List<Event>>() {
             override fun saveCallResponse(item: List<Event>) =
                 eventsLocalDataSource.insertEvents(
-                   // item
-                EventsResponse(item)
+                    EventsResponse(item)
                 )
 
             override fun shouldFetch(data: EventsEntity?): Boolean = fetchRequired
