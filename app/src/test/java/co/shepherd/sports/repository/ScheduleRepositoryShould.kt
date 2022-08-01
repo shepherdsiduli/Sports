@@ -85,7 +85,6 @@ class ScheduleRepositoryShould {
 
         val scheduleEntity = scheduleEntitySlots[0]
         Truth.assertThat(scheduleEntity.status).isEqualTo(Status.SUCCESS)
-        //Truth.assertThat(scheduleEntity.data?.name).isEqualTo("Istanbul")
         Truth.assertThat(scheduleEntity.data?.id).isEqualTo(1)
     }
 
