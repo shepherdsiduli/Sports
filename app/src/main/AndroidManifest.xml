@@ -30,6 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:theme="@style/Theme.Sports.NoActionBar"
+            android:name=".ui.MediaPlayerActivity"/>
     </application>
 
 </manifest>

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import co.shepherd.sports.core.BaseAdapter
 import co.shepherd.sports.databinding.EventItemViewBinding
 import co.shepherd.sports.domain.model.Event
+import co.shepherd.sports.ui.MediaPlayerActivity
 
 class EventsAdapter (
-    //private val callBack: (Event, View, View, View, View, View) -> Unit
     private val callBack: (Event, View) -> Unit
 ) : BaseAdapter<Event>(diffCallback) {
 
@@ -25,14 +25,7 @@ class EventsAdapter (
 
         mBinding.cardView.setOnClickListener {
             mBinding.viewModel?.item?.get()?.let {
-                callBack(
-                    it,
-                    mBinding.cardView
-//                    mBinding.imageViewForecastIcon,
-//                    mBinding.textViewDayOfWeek,
-//                    mBinding.textViewTemp,
-//                    mBinding.linearLayoutTempMaxMin
-                )
+                it.videoUrl?.let { url -> mBinding.cardView.context.startActivity(MediaPlayerActivity.getStartIntent(mBinding.cardView.context, url, it.title)) }
             }
         }
         return mBinding
