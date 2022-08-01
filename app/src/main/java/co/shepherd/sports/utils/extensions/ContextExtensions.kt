@@ -77,6 +77,25 @@ fun getEventDate(data: String): String {
     } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) === 1) {
         "Yesterday, " + SimpleDateFormat("hh:mm").format(eventDate)
     } else {
-        SimpleDateFormat("hh:mm a").format(eventDate)
+        SimpleDateFormat("dd.MM.yyyy").format(eventDate)
+    }
+}
+
+fun getScheduleDate(data: String): String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    var eventDate = format.parse(data)
+
+    val now: Calendar = Calendar.getInstance()
+    val eventTime: Calendar = Calendar.getInstance()
+    eventTime.setTimeInMillis(eventDate.time)
+
+    return if (now.get(Calendar.DATE) === eventTime.get(Calendar.DATE)) {
+        "Today, " + SimpleDateFormat("hh:mm").format(eventDate)
+    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === 1) {
+        "Yesterday, " + SimpleDateFormat("hh:mm").format(eventDate)
+    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === 2) {
+        "In three days"
+    } else {
+        "In to days"
     }
 }

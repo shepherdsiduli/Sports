@@ -29,5 +29,4 @@ class ScheduleViewModel @Inject internal constructor(
         }
         _scheduleParams.postValue(params)
     }
-
 }

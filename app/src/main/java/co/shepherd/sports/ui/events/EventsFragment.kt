@@ -8,6 +8,7 @@ import co.shepherd.sports.core.BaseFragment
 import co.shepherd.sports.databinding.FragmentEventsBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.usecase.EventsUseCase
+import co.shepherd.sports.ui.MainActivity
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 import co.shepherd.sports.utils.extensions.observeWith
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,18 +47,9 @@ class EventsFragment : BaseFragment<EventsViewModel, FragmentEventsBinding>(
             with(binding) {
                 viewState = it
                 it.data?.events?.let { events -> initEvents(events.events) }
-//                (activity as MainActivity).viewModel.toolbarTitle.set(
-//                    it.data?.city?.getCityAndCountry()
-//                )
-            }
-        }
-
-        binding.viewModel?.getEventsViewState()?.observeWith(
-            viewLifecycleOwner
-        ) {
-            with(binding) {
-                it.getEvents()
-                //  containerEvents.viewState = it
+                (activity as MainActivity).viewModel.toolbarTitle.set(
+                    "Events"
+                )
             }
         }
     }

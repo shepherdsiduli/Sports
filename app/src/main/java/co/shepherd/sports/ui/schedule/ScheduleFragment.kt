@@ -7,6 +7,7 @@ import co.shepherd.sports.core.BaseFragment
 import co.shepherd.sports.databinding.FragmentScheduleBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.usecase.ScheduleUseCase
+import co.shepherd.sports.ui.MainActivity
 import co.shepherd.sports.ui.events.EventsAdapter
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 import co.shepherd.sports.utils.extensions.observeWith
@@ -26,7 +27,12 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
         )
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-
+            binding.swipeRefreshLayout.isRefreshing = false
+            binding.viewModel?.setScheduleParams(
+                ScheduleUseCase.ScheduleParams(
+                    isNetworkAvailable(requireContext()),
+                )
+            )
         }
 
         binding.viewModel?.setScheduleParams(
@@ -41,9 +47,6 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
             with(binding) {
                 viewState = it
                 it.data?.schedule?.let { events -> initEvents(events.schedule) }
-//                (activity as MainActivity).viewModel.toolbarTitle.set(
-//                    it.data?.city?.getCityAndCountry()
-//                )
             }
         }
 
@@ -51,8 +54,11 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
             viewLifecycleOwner
         ) {
             with(binding) {
-                it.getSchedule()
-                //  containerEvents.viewState = it
+                viewState = it
+                it.data?.schedule?.let { schedule -> initEvents(schedule.schedule) }
+                (activity as MainActivity).viewModel.toolbarTitle.set(
+                    "Schedule"
+                )
             }
         }
     }
@@ -60,25 +66,6 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
     private fun initEventsAdapter() {
         val adapter =
             EventsAdapter { item, cardView ->
-//                val action =
-//                    DashboardFragmentDirections.actionDashboardFragmentToWeatherDetailFragment(
-//                        item
-//                    )
-//                findNavController()
-//                    .navigate(
-//                        action,
-//                        FragmentNavigator.Extras.Builder()
-//                            .addSharedElements(
-//                                mapOf(
-//                                    cardView to cardView.transitionName,
-//                                    forecastIcon to forecastIcon.transitionName,
-//                                    dayOfWeek to dayOfWeek.transitionName,
-//                                    temp to temp.transitionName,
-//                                    tempMaxMin to tempMaxMin.transitionName
-//                                )
-//                            )
-//                            .build()
-//                    )
             }
 
         binding.recyclerViewEvents.adapter = adapter
@@ -96,7 +83,6 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
     }
 
     private fun initEvents(list: List<Event>) {
-        (binding.recyclerViewEvents.adapter as EventsAdapter).submitList(list)
+        (binding.recyclerViewEvents.adapter as ScheduleAdapter).submitList(list)
     }
-
 }
