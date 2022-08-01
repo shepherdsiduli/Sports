@@ -12,15 +12,11 @@ class SportsApp : Application() {
         super.onCreate()
 
         if (BuildConfig.DEBUG && !isRoboUnitTest()) {
-         //   Timber.plant(Timber.DebugTree())
             Stetho.initializeWithDefaults(this)
         }
-
-      //   AndroidThreeTen.init(this)
     }
 
     private fun isRoboUnitTest(): Boolean {
         return "robolectric" == Build.FINGERPRINT
     }
-
 }
