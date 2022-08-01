@@ -21,7 +21,7 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
 
     override fun init() {
         super.init()
-        initEventsAdapter()
+        initScheduleAdapter()
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(
             android.R.transition.move
         )
@@ -63,19 +63,19 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
         }
     }
 
-    private fun initEventsAdapter() {
+    private fun initScheduleAdapter() {
         val adapter =
-            EventsAdapter { item, cardView ->
+            ScheduleAdapter { item, cardView ->
             }
 
-        binding.recyclerViewEvents.adapter = adapter
-        binding.recyclerViewEvents.layoutManager = LinearLayoutManager(
+        binding.recyclerViewSchedule.adapter = adapter
+        binding.recyclerViewSchedule.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
             false
         )
         postponeEnterTransition()
-        binding.recyclerViewEvents.viewTreeObserver
+        binding.recyclerViewSchedule.viewTreeObserver
             .addOnPreDrawListener {
                 startPostponedEnterTransition()
                 true
@@ -83,6 +83,6 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
     }
 
     private fun initEvents(list: List<Event>) {
-        (binding.recyclerViewEvents.adapter as ScheduleAdapter).submitList(list)
+        (binding.recyclerViewSchedule.adapter as ScheduleAdapter).submitList(list)
     }
 }

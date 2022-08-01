@@ -53,10 +53,10 @@ class MediaPlayerActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         if (exoPlayer.isPlaying) {
             exoPlayer.stop()
             exoPlayer.release()
         }
-        super.onBackPressed()
     }
 }
