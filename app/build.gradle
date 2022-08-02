@@ -13,8 +13,8 @@ android {
         applicationId "co.shepherd.sports"
         minSdk 24
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
