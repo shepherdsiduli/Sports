@@ -8,10 +8,11 @@ import co.shepherd.sports.databinding.FragmentScheduleBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.usecase.ScheduleUseCase
 import co.shepherd.sports.ui.MainActivity
-import co.shepherd.sports.ui.events.EventsAdapter
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 import co.shepherd.sports.utils.extensions.observeWith
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding>(
@@ -83,6 +84,12 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
     }
 
     private fun initEvents(list: List<Event>) {
-        (binding.recyclerViewSchedule.adapter as ScheduleAdapter).submitList(list)
+        val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+
+        val result = list.sortedByDescending {
+            LocalDate.parse(it.date, dateTimeFormatter)
+        }
+
+        (binding.recyclerViewSchedule.adapter as ScheduleAdapter).submitList(result)
     }
 }
