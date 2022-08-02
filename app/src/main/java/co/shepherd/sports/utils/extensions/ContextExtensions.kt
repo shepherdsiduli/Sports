@@ -8,7 +8,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import co.shepherd.sports.R
+import co.shepherd.sports.domain.model.Event
 import java.io.File
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -98,4 +101,14 @@ fun getScheduleDate(data: String): String {
     } else {
         "In to days"
     }
+}
+
+fun sortEvents(data: List<Event>): List<Event> {
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+
+    val result = data.sortedByDescending {
+        LocalDate.parse(it.date, dateTimeFormatter)
+    }
+
+    return result
 }
