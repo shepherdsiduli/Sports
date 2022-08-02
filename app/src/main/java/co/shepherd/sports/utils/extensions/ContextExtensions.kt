@@ -91,9 +91,9 @@ fun getScheduleDate(data: String): String {
 
     return if (now.get(Calendar.DATE) === eventTime.get(Calendar.DATE)) {
         "Today, " + SimpleDateFormat("hh:mm").format(eventDate)
-    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === 1) {
-        "Yesterday, " + SimpleDateFormat("hh:mm").format(eventDate)
-    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === 2) {
+    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === -1) {
+        "Tomorrow, " + SimpleDateFormat("hh:mm").format(eventDate)
+    } else if (now.get(Calendar.DATE) - eventTime.get(Calendar.DATE) === -2) {
         "In three days"
     } else {
         "In to days"
