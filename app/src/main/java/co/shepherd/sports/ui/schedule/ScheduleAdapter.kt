@@ -1,7 +1,6 @@
 package co.shepherd.sports.ui.schedule
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -10,9 +9,7 @@ import co.shepherd.sports.databinding.ScheduleItemViewBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.ui.events.EventViewModel
 
-class ScheduleAdapter (
-    private val callBack: (Event, View) -> Unit
-) : BaseAdapter<Event>(diffCallback) {
+class ScheduleAdapter : BaseAdapter<Event>(diffCallback) {
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
         val mBinding = ScheduleItemViewBinding.inflate(
