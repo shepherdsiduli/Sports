@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import co.shepherd.sports.R
 import co.shepherd.sports.utils.extensions.getEventDate
+import co.shepherd.sports.utils.extensions.getScheduleDate
 import co.shepherd.sports.utils.extensions.hide
 import co.shepherd.sports.utils.extensions.show
 import com.squareup.picasso.Picasso
@@ -28,9 +29,14 @@ fun loadImage(view: ImageView, imageUrl: String?) {
         .into(view)
 }
 
-@BindingAdapter("app:loadDate")
-fun loadDate(view: TextView, data: String) {
+@BindingAdapter("app:loadEventDate")
+fun loadEventDate(view: TextView, data: String) {
     view.text = getEventDate(data)
+}
+
+@BindingAdapter("app:loadScheduleDate")
+fun loadScheduleDate(view: TextView, data: String) {
+    view.text = getScheduleDate(data)
 }
 
 @BindingAdapter("app:setErrorView")

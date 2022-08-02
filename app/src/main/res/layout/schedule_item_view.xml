@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="co.shepherd.sports.ui.events.EventViewModel" />
+            type="co.shepherd.sports.ui.events.EventViewModel"/>
     </data>
 
     <LinearLayout
@@ -89,7 +89,7 @@
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:loadEventDate="@{viewModel.item.date}"
+                    app:loadScheduleDate="@{viewModel.item.date}"
                     android:layout_marginBottom="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView"
                     app:layout_constraintEnd_toEndOf="@id/guideline_right"
