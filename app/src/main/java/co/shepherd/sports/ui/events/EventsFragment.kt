@@ -10,6 +10,7 @@ import co.shepherd.sports.domain.usecase.EventsUseCase
 import co.shepherd.sports.ui.MainActivity
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 import co.shepherd.sports.utils.extensions.observeWith
+import co.shepherd.sports.utils.extensions.sortEvents
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,6 +74,6 @@ class EventsFragment : BaseFragment<EventsViewModel, FragmentEventsBinding>(
     }
 
     private fun initEvents(list: List<Event>) {
-        (binding.recyclerViewEvents.adapter as EventsAdapter).submitList(list)
+        (binding.recyclerViewEvents.adapter as EventsAdapter).submitList(sortEvents(list))
     }
 }
