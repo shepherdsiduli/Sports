@@ -54,16 +54,6 @@ class ScheduleDaoShould {
     }
 
     @Test
-    fun `insert one entity and count must be one`() {
-        // When
-        scheduleDao.insertSchedule(generateScheduleEntity())
-
-        // Then
-        val count = scheduleDao.getCount()
-        Truth.assertThat(count).isEqualTo(1)
-    }
-
-    @Test
     fun `insert one entity and test get function`() {
         // When
         scheduleDao.insertSchedule(generateScheduleEntity())
@@ -73,31 +63,41 @@ class ScheduleDaoShould {
         Truth.assertThat(entity.id).isEqualTo(1)
     }
 
-    @Test
-    fun `delete and insert a schedule`() {
-        // When
-        scheduleDao.deleteAndInsert(generateScheduleEntity())
-        val count = scheduleDao.getCount()
-        Truth.assertThat(count).isEqualTo(1)
-
-        // Then
-        scheduleDao.deleteAndInsert(generateScheduleEntity())
-        val newCount = scheduleDao.getCount()
-        val value = scheduleDao.getSchedule().getOrAwaitValue()
-        Truth.assertThat(newCount).isEqualTo(1)
-        Truth.assertThat(value.id).isEqualTo(1)
-    }
-
-    @Test
-    fun `first insert a schedule then delete and count must be zero`() {
-        // When
-        scheduleDao.deleteAndInsert(generateScheduleEntity())
-        val count = scheduleDao.getCount()
-        Truth.assertThat(count).isEqualTo(1)
-
-        // Then
-        scheduleDao.deleteAll()
-        val newCount = scheduleDao.getCount()
-        Truth.assertThat(newCount).isEqualTo(0)
-    }
+//    @Test
+//    fun `insert one entity and count must be one`() {
+//        // When
+//        scheduleDao.insertSchedule(generateScheduleEntity())
+//
+//        // Then
+//        val count = scheduleDao.getCount()
+//        Truth.assertThat(count).isEqualTo(1)
+//    }
+//
+//    @Test
+//    fun `delete and insert a schedule`() {
+//        // When
+//        scheduleDao.deleteAndInsert(generateScheduleEntity())
+//        val count = scheduleDao.getCount()
+//        Truth.assertThat(count).isEqualTo(1)
+//
+//        // Then
+//        scheduleDao.deleteAndInsert(generateScheduleEntity())
+//        val newCount = scheduleDao.getCount()
+//        val value = scheduleDao.getSchedule().getOrAwaitValue()
+//        Truth.assertThat(newCount).isEqualTo(1)
+//        Truth.assertThat(value.id).isEqualTo(1)
+//    }
+//
+//    @Test
+//    fun `first insert a schedule then delete and count must be zero`() {
+//        // When
+//        scheduleDao.deleteAndInsert(generateScheduleEntity())
+//        val count = scheduleDao.getCount()
+//        Truth.assertThat(count).isEqualTo(1)
+//
+//        // Then
+//        scheduleDao.deleteAll()
+//        val newCount = scheduleDao.getCount()
+//        Truth.assertThat(newCount).isEqualTo(0)
+//    }
 }
