@@ -1,7 +1,7 @@
 package co.shepherd.sports.utils.domain
 
-enum class Status {
-    SUCCESS,
-    LOADING,
-    ERROR
+sealed class Status {
+    object SUCCESS: Status()
+    object LOADING: Status()
+    object ERROR: Status()
 }
