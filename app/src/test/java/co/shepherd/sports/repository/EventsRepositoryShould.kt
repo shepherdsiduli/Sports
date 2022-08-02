@@ -12,6 +12,7 @@ import co.shepherd.sports.utils.createSampleEventsResponse
 import co.shepherd.sports.utils.domain.Resource
 import co.shepherd.sports.utils.domain.Status
 import co.shepherd.sports.utils.generateEventsEntity
+import co.shepherd.sports.utils.sampleEventsResponse
 import com.google.common.truth.Truth
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -85,6 +86,51 @@ class EventsRepositoryShould {
 
         val eventsEntity = eventsEntitySlots[0]
         Truth.assertThat(eventsEntity.status).isEqualTo(Status.SUCCESS)
+        Truth.assertThat(eventsEntity.data?.id).isEqualTo(1)
+    }
+
+    @Test
+    fun `given fetchRequired = true, when getEvents called, then make sure network called`() {
+        // Given
+        val fetchRequired = true
+        val eventsLiveData: MutableLiveData<EventsEntity> = MutableLiveData()
+        eventsLiveData.postValue(EventsEntity(1, sampleEventsResponse()))
+        val mockedObserver: Observer<Resource<EventsEntity>> = mockk(relaxUnitFun = true)
+
+        // When
+        every {
+            eventsRemoteDataSource.getEvents()
+        } returns Single.just(createSampleEventsResponse())
+        every {
+            eventsLocalDataSource.insertEvents(
+                sampleEventsResponse()
+            )
+        } just runs
+        every { eventsLocalDataSource.getEvents() } returns eventsLiveData
+
+        eventsRepository
+            .loadEvents(
+                fetchRequired
+            )
+            .observeForever(mockedObserver)
+
+        /**
+         * shouldFetch == true -> createCall() -> saveCallResult() -> loadFromDb()
+         */
+
+        // Make sure network called
+        verify {
+            eventsRemoteDataSource.getEvents()
+        }
+        // Make sure db called
+        verify { eventsLocalDataSource.getEvents() }
+
+        // Then
+        val eventsEntitySlots = mutableListOf<Resource<EventsEntity>>()
+        verify { mockedObserver.onChanged(capture(eventsEntitySlots)) }
+
+        val eventsEntity = eventsEntitySlots[0]
+
         Truth.assertThat(eventsEntity.data?.id).isEqualTo(1)
     }
 }

@@ -68,3 +68,13 @@ fun createSampleEventsResponse(): List<Event>{
     val event = Event("1","Liverpool v Porto","UEFA Champions League", "2022-08-01T01:38:40.472Z", "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310176837169_image-header_pDach_1554579780000.jpeg?alt=media&token=1777d26b-d051-4b5f-87a8-7633d3d6dd20", "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media")
     return listOf(event)
 }
+
+fun sampleScheduleResponse(): ScheduleResponse{
+    val event = Event("1","Liverpool v Porto","UEFA Champions League", "2022-08-01T01:38:40.472Z", "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310176837169_image-header_pDach_1554579780000.jpeg?alt=media&token=1777d26b-d051-4b5f-87a8-7633d3d6dd20", "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media")
+    return ScheduleResponse(listOf(event))
+}
+
+fun sampleEventsResponse(): EventsResponse{
+    val event = Event("1","Liverpool v Porto","UEFA Champions League", "2022-08-01T01:38:40.472Z", "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310176837169_image-header_pDach_1554579780000.jpeg?alt=media&token=1777d26b-d051-4b5f-87a8-7633d3d6dd20", null)
+    return EventsResponse(listOf(event))
+}

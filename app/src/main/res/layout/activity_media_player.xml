@@ -23,9 +23,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:hide_on_touch="true"
+        app:hide_on_touch="false"
         app:player_layout_id="@layout/exo_player_view"
         app:resize_mode="fixed_width"
-        app:show_timeout="2000"/>
+        app:show_timeout="0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
