@@ -8,7 +8,6 @@ import co.shepherd.sports.databinding.FragmentScheduleBinding
 import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.usecase.ScheduleUseCase
 import co.shepherd.sports.ui.MainActivity
-import co.shepherd.sports.ui.events.EventsAdapter
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 import co.shepherd.sports.utils.extensions.observeWith
 import dagger.hilt.android.AndroidEntryPoint
