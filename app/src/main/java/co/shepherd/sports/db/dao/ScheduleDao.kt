@@ -2,7 +2,6 @@ package co.shepherd.sports.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import co.shepherd.sports.db.entities.EventsEntity
 import co.shepherd.sports.db.entities.ScheduleEntity
 
 @Dao

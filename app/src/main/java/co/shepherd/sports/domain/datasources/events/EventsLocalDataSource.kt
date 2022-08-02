@@ -2,7 +2,6 @@ package co.shepherd.sports.domain.datasources.events
 
 import co.shepherd.sports.db.dao.EventsDao
 import co.shepherd.sports.db.entities.EventsEntity
-import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.domain.model.EventsResponse
 import javax.inject.Inject
 
