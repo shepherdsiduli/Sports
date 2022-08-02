@@ -12,6 +12,7 @@ import co.shepherd.sports.utils.createSampleScheduleResponse
 import co.shepherd.sports.utils.domain.Resource
 import co.shepherd.sports.utils.domain.Status
 import co.shepherd.sports.utils.generateScheduleEntity
+import co.shepherd.sports.utils.sampleScheduleResponse
 import com.google.common.truth.Truth
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -85,6 +86,51 @@ class ScheduleRepositoryShould {
 
         val scheduleEntity = scheduleEntitySlots[0]
         Truth.assertThat(scheduleEntity.status).isEqualTo(Status.SUCCESS)
+        Truth.assertThat(scheduleEntity.data?.id).isEqualTo(1)
+    }
+
+    @Test
+    fun `given fetchRequired = true, when getSchedule called, then make sure network called`() {
+        // Given
+        val fetchRequired = true
+        val scheduleLiveData: MutableLiveData<ScheduleEntity> = MutableLiveData()
+        scheduleLiveData.postValue(ScheduleEntity(1, sampleScheduleResponse()))
+        val mockedObserver: Observer<Resource<ScheduleEntity>> = mockk(relaxUnitFun = true)
+
+        // When
+        every {
+            scheduleRemoteDataSource.getSchedule()
+        } returns Single.just(createSampleScheduleResponse())
+        every {
+            scheduleLocalDataSource.insertSchedule(
+                sampleScheduleResponse()
+            )
+        } just runs
+        every { scheduleLocalDataSource.getSchedule() } returns scheduleLiveData
+
+        scheduleRepository
+            .loadSchedule(
+                fetchRequired
+            )
+            .observeForever(mockedObserver)
+
+        /**
+         * shouldFetch == true -> createCall() -> saveCallResult() -> loadFromDb()
+         */
+
+        // Make sure network called
+        verify {
+            scheduleRemoteDataSource.getSchedule()
+        }
+        // Make sure db called
+        verify { scheduleLocalDataSource.getSchedule() }
+
+        // Then
+        val scheduleEntitySlots = mutableListOf<Resource<ScheduleEntity>>()
+        verify { mockedObserver.onChanged(capture(scheduleEntitySlots)) }
+
+        val scheduleEntity = scheduleEntitySlots[0]
+
         Truth.assertThat(scheduleEntity.data?.id).isEqualTo(1)
     }
 

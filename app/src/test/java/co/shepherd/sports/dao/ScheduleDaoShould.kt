@@ -70,7 +70,7 @@ class ScheduleDaoShould {
 
         // Then
         val entity = scheduleDao.getSchedule().getOrAwaitValue()
-        Truth.assertThat(entity.id).isEqualTo("1")
+        Truth.assertThat(entity.id).isEqualTo(1)
     }
 
     @Test
