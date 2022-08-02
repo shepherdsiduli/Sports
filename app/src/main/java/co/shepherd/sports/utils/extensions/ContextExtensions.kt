@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.system.exitProcess
 
+private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 fun isNetworkAvailable(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -68,7 +69,7 @@ fun Activity.isDeviceRooted(): Boolean {
 }
 
 fun getEventDate(data: String): String {
-    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val format = SimpleDateFormat(DATE_FORMAT)
     var eventDate = format.parse(data)
 
     val now: Calendar = Calendar.getInstance()
@@ -85,7 +86,7 @@ fun getEventDate(data: String): String {
 }
 
 fun getScheduleDate(data: String): String {
-    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val format = SimpleDateFormat(DATE_FORMAT)
     var eventDate = format.parse(data)
 
     val now: Calendar = Calendar.getInstance()
@@ -104,7 +105,7 @@ fun getScheduleDate(data: String): String {
 }
 
 fun sortEvents(data: List<Event>): List<Event> {
-    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
 
     val result = data.sortedByDescending {
         LocalDate.parse(it.date, dateTimeFormatter)

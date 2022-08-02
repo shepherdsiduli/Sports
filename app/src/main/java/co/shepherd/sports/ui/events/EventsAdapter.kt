@@ -1,7 +1,6 @@
 package co.shepherd.sports.ui.events
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -11,9 +10,7 @@ import co.shepherd.sports.domain.model.Event
 import co.shepherd.sports.ui.MediaPlayerActivity
 import co.shepherd.sports.utils.extensions.isNetworkAvailable
 
-class EventsAdapter(
-    private val callBack: (Event, View) -> Unit
-) : BaseAdapter<Event>(diffCallback) {
+class EventsAdapter : BaseAdapter<Event>(diffCallback) {
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
         val mBinding = EventItemViewBinding.inflate(

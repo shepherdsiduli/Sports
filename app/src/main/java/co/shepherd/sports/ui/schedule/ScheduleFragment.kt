@@ -65,8 +65,7 @@ class ScheduleFragment : BaseFragment<ScheduleViewModel, FragmentScheduleBinding
 
     private fun initScheduleAdapter() {
         val adapter =
-            ScheduleAdapter { item, cardView ->
-            }
+            ScheduleAdapter()
 
         binding.recyclerViewSchedule.adapter = adapter
         binding.recyclerViewSchedule.layoutManager = LinearLayoutManager(

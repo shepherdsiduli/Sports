@@ -56,8 +56,7 @@ class EventsFragment : BaseFragment<EventsViewModel, FragmentEventsBinding>(
 
     private fun initEventsAdapter() {
         val adapter =
-            EventsAdapter { item, cardView ->
-            }
+            EventsAdapter()
 
         binding.recyclerViewEvents.adapter = adapter
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(
