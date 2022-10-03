@@ -74,7 +74,7 @@ fun getEventDate(data: String): String {
 
     val now: Calendar = Calendar.getInstance()
     val smsTime: Calendar = Calendar.getInstance()
-    smsTime.setTimeInMillis(eventDate.time)
+    smsTime.timeInMillis = eventDate.time
 
     return if (now.get(Calendar.DATE) === smsTime.get(Calendar.DATE)) {
         "Today, " + SimpleDateFormat("hh:mm").format(eventDate)
@@ -91,7 +91,7 @@ fun getScheduleDate(data: String): String {
 
     val now: Calendar = Calendar.getInstance()
     val eventTime: Calendar = Calendar.getInstance()
-    eventTime.setTimeInMillis(eventDate.time)
+    eventTime.timeInMillis = eventDate.time
 
     return if (now.get(Calendar.DATE) === eventTime.get(Calendar.DATE)) {
         "Today, " + SimpleDateFormat("hh:mm").format(eventDate)
